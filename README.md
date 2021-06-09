@@ -62,7 +62,9 @@ Terraform is very simple to use. It follows declarative approach where one can d
 
 
 
-:metal:  Enough said!!! Time to run :rocket: :rocket: :rocket: :rocket: :rocket: :rocket:
+
+
+:metal:  __Enough said!!! Time to run__ :rocket: :rocket: :rocket: :rocket: :rocket: :rocket:
 
 
 
@@ -156,7 +158,7 @@ azurerm_kubernetes_cluster.aks: Still creating... [1m10s elapsed]
 6. Use terraform destroy to delete the created cluster.
 
 
-:warning: :firecracker: :warning: :firecracker:
+:warning: :firecracker: __NOTE__ :warning: :firecracker:
 
 Since it is a private cluster and the access via internet to the k8s api is blocked as mentioned above, the only way to reach this cluster is via one of the method below:
 
