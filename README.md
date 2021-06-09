@@ -1,5 +1,6 @@
 # terraform-akspvtcluster
 [<img src="./docs/images/azure-kubernetes-banner.png" align="centre">](https://docs.microsoft.com/en-us/azure/aks/)
+
 This repo explains and has a template to easily create an AKS "Private" Cluster using terraform.
 
 # _What is AKS?_
@@ -120,8 +121,8 @@ Resource actions are indicated with the following symbols:
 
 Terraform will perform the following actions:
 
-  # azurerm_kubernetes_cluster.demo will be created
-  + resource "azurerm_kubernetes_cluster" "demo" {
+  # azurerm_kubernetes_cluster.aks will be created
+  + resource "azurerm_kubernetes_cluster" "aks" {
       + dns_prefix              = "funapp"
       + fqdn                    = (known after apply)
       + id                      = (known after apply)
@@ -133,21 +134,21 @@ Terraform will perform the following actions:
 
 ```
 terraform apply out.plan
-azurerm_resource_group.demo: Creating...
-azurerm_resource_group.demo: Creation complete after 1s [id=/subscriptions/********-****-****-****-************/resourceGroups/cs-rg]
-azurerm_virtual_network.demo: Creating...
-azurerm_virtual_network.demo: Still creating... [10s elapsed]
-azurerm_virtual_network.demo: Creation complete after 15s [id=/subscriptions/********-****-****-****-************/resourceGroups/cs-rg/providers/Microsoft.Network/virtualNetworks/cs-network]
-azurerm_subnet.demo: Creating...
-azurerm_subnet.demo: Creation complete after 2s [id=/subscriptions/********-****-****-****-************/resourceGroups/cs-rg/providers/Microsoft.Network/virtualNetworks/cs-network/subnets/cs-subnet]
-azurerm_kubernetes_cluster.demo: Creating...
-azurerm_kubernetes_cluster.demo: Still creating... [10s elapsed]
-azurerm_kubernetes_cluster.demo: Still creating... [20s elapsed]
-azurerm_kubernetes_cluster.demo: Still creating... [30s elapsed]
-azurerm_kubernetes_cluster.demo: Still creating... [40s elapsed]
-azurerm_kubernetes_cluster.demo: Still creating... [50s elapsed]
-azurerm_kubernetes_cluster.demo: Still creating... [1m0s elapsed]
-azurerm_kubernetes_cluster.demo: Still creating... [1m10s elapsed]
+azurerm_resource_group.aks: Creating...
+azurerm_resource_group.aks: Creation complete after 1s [id=/subscriptions/********-****-****-****-************/resourceGroups/cs-rg]
+azurerm_virtual_network.aks: Creating...
+azurerm_virtual_network.aks: Still creating... [10s elapsed]
+azurerm_virtual_network.aks: Creation complete after 15s [id=/subscriptions/********-****-****-****-************/resourceGroups/cs-rg/providers/Microsoft.Network/virtualNetworks/cs-network]
+azurerm_subnet.aks: Creating...
+azurerm_subnet.aks: Creation complete after 2s [id=/subscriptions/********-****-****-****-************/resourceGroups/cs-rg/providers/Microsoft.Network/virtualNetworks/cs-network/subnets/cs-subnet]
+azurerm_kubernetes_cluster.aks: Creating...
+azurerm_kubernetes_cluster.aks: Still creating... [10s elapsed]
+azurerm_kubernetes_cluster.aks: Still creating... [20s elapsed]
+azurerm_kubernetes_cluster.aks: Still creating... [30s elapsed]
+azurerm_kubernetes_cluster.aks: Still creating... [40s elapsed]
+azurerm_kubernetes_cluster.aks: Still creating... [50s elapsed]
+azurerm_kubernetes_cluster.aks: Still creating... [1m0s elapsed]
+azurerm_kubernetes_cluster.aks: Still creating... [1m10s elapsed]
 ```
 
 5. Login into the console to cross verify the provisioned resources.
@@ -159,20 +160,20 @@ azurerm_kubernetes_cluster.demo: Still creating... [1m10s elapsed]
 
 Since it is a private cluster and the access via internet to the k8s api is blocked as mentioned above, the only way to reach this cluster is via one of the method below:
 
-> Create a VM in the subnet and access the k8s api from that
+> Create a VM in the subnet and access the k8s api from that.
 > If you happened to be on different Vnet then  virtual network peering is one way to access your private cluster.
 
 To use virtual network peering, you need to set up a link between virtual network and the private DNS zone.
 
-Go to the node resource group in the Azure portal.
-Select the private DNS zone.
-In the left pane, select the Virtual network link.
-Create a new link to add the virtual network of the VM to the private DNS zone. It takes a few minutes for the DNS zone link to become available.
-In the Azure portal, navigate to the resource group that contains your cluster's virtual network.
-In the right pane, select the virtual network. The virtual network name is in the form aks-vnet-*.
-In the left pane, select Peerings.
-Select Add, add the virtual network of the VM, and then create the peering.
-Go to the virtual network where you have the VM, select Peerings, select the AKS virtual network, and then create the peering. If the address ranges on the AKS virtual network and the VM's virtual network clash, peering fails. For more information, see Virtual network peering.
+* Go to the node resource group in the Azure portal.
+* Select the private DNS zone.
+* In the left pane, select the Virtual network link.
+* Create a new link to add the virtual network of the VM to the private DNS zone. It takes a few minutes for the DNS zone link to become available.
+* In the Azure portal, navigate to the resource group that contains your cluster's virtual network.
+* In the right pane, select the virtual network. The virtual network name is in the form aks-vnet-*.
+* In the left pane, select Peerings.
+* Select Add, add the virtual network of the VM, and then create the peering.
+* Go to the virtual network where you have the VM, select Peerings, select the AKS virtual network, and then create the peering. If the address ranges on the AKS virtual network and the VM's virtual network clash, peering fails. For more information, see Virtual network peering.
 
 
 # Follow-Me
